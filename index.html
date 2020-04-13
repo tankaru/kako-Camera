@@ -17,7 +17,7 @@
 </head>
 <body>
 <!-- https://blog.katsubemakito.net/html5/camera1 -->
-<h1>Timemachine Camera 0.2041</h1>
+<h1>Timemachine Camera 0.2046</h1>
 
 <!-- https://otiai10.hatenablog.com/entry/2019/11/11/090124 -->
 <video id="camera" width="300" height="200" autoplay muted playsinline="true"></video>
@@ -25,7 +25,8 @@
 <!--
 <canvas id="picture" width="300" height="200"></canvas>
 -->
-<span id="mapillary"></span>
+<p><span id="mapillary"></span></p>
+<p><span id="captured_at"></span></p>
 <form>
   <button type="button" id="shutter">Shoot!</button>
 </form>
@@ -113,7 +114,8 @@ window.onload = () => {
 				
 				const img = 'https://images.mapillary.com/' + key + '/thumb-320.jpg';
 				document.getElementById("mapillary").innerHTML = '<img src="' + img + '">';
-				
+				const d =  new Date(captured_at);
+				document.getElementById("captured_at").innerText ="Captured at: " + d.toLocaleString();
 				
 			};
 			request.send();
