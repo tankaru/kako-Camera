@@ -17,18 +17,23 @@
 </head>
 <body>
 <!-- https://blog.katsubemakito.net/html5/camera1 -->
-<h1>過去カメラ 0.2010</h1>
+<h1>Timemachine Camera 0.2041</h1>
 
 <!-- https://otiai10.hatenablog.com/entry/2019/11/11/090124 -->
 <video id="camera" width="300" height="200" autoplay muted playsinline="true"></video>
+
+<!--
 <canvas id="picture" width="300" height="200"></canvas>
+-->
+<span id="mapillary"></span>
 <form>
-  <button type="button" id="shutter">シャッター</button>
+  <button type="button" id="shutter">Shoot!</button>
 </form>
 
 <div id="attributions">
 <p>Attributions
 <ul>
+<li>Photo: Mapillary
 <li>SE: <a href="https://soundeffect-lab.info/">効果音ラボ</a>
 <li>Source code: <a href="https://blog.katsubemakito.net/html5/camera1">ねこの足跡R</a>
 </ul>
@@ -38,6 +43,9 @@
 </audio>
 
 <script>
+
+const client_id = 'NEh3V0ZjaE1fT1Nkdk9jMnJlSGNQQToyNzlmZjQxM2U2MjBjMGUy';
+
 window.onload = () => {
   const video  = document.querySelector("#camera");
   const canvas = document.querySelector("#picture");
@@ -72,7 +80,7 @@ window.onload = () => {
    * シャッターボタン
    */
    document.querySelector("#shutter").addEventListener("click", () => {
-    const ctx = canvas.getContext("2d");
+    //const ctx = canvas.getContext("2d");
 
     // 演出的な目的で一度映像を止めてSEを再生する
     video.pause();  // 映像を停止
@@ -84,7 +92,31 @@ window.onload = () => {
 	navigator.geolocation.getCurrentPosition(
         // 取得成功した場合
         function(position) {
-            alert("緯度:"+position.coords.latitude+",経度:"+position.coords.longitude + " ,方角:" + position.coords.heading);
+			
+			const lat = position.coords.latitude;
+			const lon = position.coords.longitude;
+			const heading = position.coords.heading;
+			
+            const url = 'https://a.mapillary.com/v3/images?client_id=' + client_id + '&closeto=' + lon + ',' + lat + '&per_page=1&radius=1000';
+			
+			const request = new XMLHttpRequest();
+			request.open('GET', url, true);
+			request.onload = function () {
+
+				const data = JSON.parse(this.response);
+				console.log(JSON.stringify(data));
+				const photos = data.features;
+				const photo = photos[0];
+				const properties = photo.properties;
+				const key = properties.key;
+				const captured_at = properties.captured_at;
+				
+				const img = 'https://images.mapillary.com/' + key + '/thumb-320.jpg';
+				document.getElementById("mapillary").innerHTML = '<img src="' + img + '">';
+				
+				
+			};
+			request.send();
         },
         // 取得失敗した場合
         function(error) {
@@ -105,7 +137,7 @@ window.onload = () => {
 		 }
 		 );
     // canvasに画像を貼り付ける
-    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    //ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
   });
 };
 </script>
