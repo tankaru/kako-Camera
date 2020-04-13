@@ -17,7 +17,7 @@
 </head>
 <body>
 <!-- https://blog.katsubemakito.net/html5/camera1 -->
-<h1>過去カメラ 0.2005</h1>
+<h1>過去カメラ 0.2010</h1>
 
 <!-- https://otiai10.hatenablog.com/entry/2019/11/11/090124 -->
 <video id="camera" width="300" height="200" autoplay muted playsinline="true"></video>
@@ -84,7 +84,7 @@ window.onload = () => {
 	navigator.geolocation.getCurrentPosition(
         // 取得成功した場合
         function(position) {
-            alert("緯度:"+position.coords.latitude+",経度"+position.coords.longitude);
+            alert("緯度:"+position.coords.latitude+",経度:"+position.coords.longitude + " ,方角:" + position.coords.heading);
         },
         // 取得失敗した場合
         function(error) {
