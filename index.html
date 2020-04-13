@@ -5,9 +5,10 @@
   	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <title>kakoCamera</title>
   <style>
-  canvas, video{
+  canvas, video, #picture {
     border: 1px solid gray;
   }
+
   #attributions {
 	clear:left;
 	background-color: #ddd;
@@ -16,14 +17,15 @@
 </head>
 <body>
 <!-- https://blog.katsubemakito.net/html5/camera1 -->
-<h1>過去カメラ 0.1943</h1>
+<h1>過去カメラ 0.2005</h1>
 
+<!-- https://otiai10.hatenablog.com/entry/2019/11/11/090124 -->
 <video id="camera" width="300" height="200" autoplay muted playsinline="true"></video>
-<!-- https://qiita.com/ueyamamasashi/items/6515ade6b60b0daa7530 -->
 <canvas id="picture" width="300" height="200"></canvas>
 <form>
   <button type="button" id="shutter">シャッター</button>
 </form>
+
 <div id="attributions">
 <p>Attributions
 <ul>
@@ -78,7 +80,30 @@ window.onload = () => {
     setTimeout( () => {
       video.play();    // 0.5秒後にカメラ再開
     }, 500);
-
+	//https://qiita.com/akkey2475/items/81f4f94f17bfe5c7ce42
+	navigator.geolocation.getCurrentPosition(
+        // 取得成功した場合
+        function(position) {
+            alert("緯度:"+position.coords.latitude+",経度"+position.coords.longitude);
+        },
+        // 取得失敗した場合
+        function(error) {
+          switch(error.code) {
+            case 1: //PERMISSION_DENIED
+              alert("位置情報の利用が許可されていません");
+              break;
+            case 2: //POSITION_UNAVAILABLE
+              alert("現在位置が取得できませんでした");
+              break;
+            case 3: //TIMEOUT
+              alert("タイムアウトになりました");
+              break;
+            default:
+              alert("その他のエラー(エラーコード:"+error.code+")");
+              break;
+          }
+		 }
+		 );
     // canvasに画像を貼り付ける
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
   });
