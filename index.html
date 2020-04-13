@@ -17,7 +17,7 @@
 </head>
 <body>
 <!-- https://blog.katsubemakito.net/html5/camera1 -->
-<h1>Time travel Camera 0.2135</h1>
+<h1>Time travel Camera 0.2140</h1>
 
 <!-- https://otiai10.hatenablog.com/entry/2019/11/11/090124 -->
 <video id="camera" width="300" height="200" autoplay muted playsinline="true"></video>
@@ -98,7 +98,7 @@ window.onload = () => {
 			const lon = position.coords.longitude;
 			const heading = position.coords.heading;
 			
-            const url = 'https://a.mapillary.com/v3/images?client_id=' + client_id + '&closeto=' + lon + ',' + lat + '&per_page=1&radius=1000';
+            const url = 'https://a.mapillary.com/v3/images?client_id=' + client_id + '&closeto=' + lon + ',' + lat + '&per_page=1&radius=100&pano=false';
 			
 			const request = new XMLHttpRequest();
 			request.open('GET', url, true);
