@@ -17,7 +17,7 @@
 </head>
 <body>
 <!-- https://blog.katsubemakito.net/html5/camera1 -->
-<h1>Timemachine Camera 0.2049</h1>
+<h1>Time travel Camera 0.2135</h1>
 
 <!-- https://otiai10.hatenablog.com/entry/2019/11/11/090124 -->
 <video id="camera" width="300" height="200" autoplay muted playsinline="true"></video>
@@ -56,8 +56,8 @@ window.onload = () => {
   const constraints = {
     audio: false,
     video: {
-      width: 300,
-      height: 200,
+      width: 200,
+      height: 300,
       //facingMode: "user"   // フロントカメラを利用する
        facingMode: { exact: "environment" }  // リアカメラを利用する場合
     }
