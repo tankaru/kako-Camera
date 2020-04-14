@@ -20,7 +20,7 @@ h1 {
 </head>
 <body>
 <!-- https://blog.katsubemakito.net/html5/camera1 -->
-<h1>Time travel Camera 0.1811</h1>
+<h1>Time travel Camera 0.1933</h1>
 
 <!-- https://otiai10.hatenablog.com/entry/2019/11/11/090124 -->
 <video id="camera" width="300" height="200" autoplay muted playsinline="true"></video>
@@ -52,9 +52,19 @@ h1 {
 const client_id = 'NEh3V0ZjaE1fT1Nkdk9jMnJlSGNQQTpkZmJhZTQyMDhiNWY3MzEw';
 
 function look_at([lon, lat], heading){
+	const D = 100; //m
+	const R = 6378137.0; //m
 	
+	const dlat = Math.asin(D * Math.cos(rad(heading))/R);
+	const dlon = Math.asin(D*Math.sin(rad(heading))/R/Math.sin(rad(90-lat)));
 	
-	return [look_at_lon, look_at_lat];
+	return [lon + deg(dlon), lat + deg(dlat)];
+}
+function deg(angle) {
+	return angle/Math.PI * 180;
+}
+function rad(angle) {
+	return angle / 360 * 2 * Math.PI;
 }
 
 window.onload = () => {
@@ -108,7 +118,9 @@ window.onload = () => {
 			const lon = position.coords.longitude;
 			const heading = position.coords.heading;
 			
-            const url = 'https://a.mapillary.com/v3/images?client_id=' + client_id + '&closeto=' + lon + ',' + lat + '&per_page=1&radius=20&pano=false';
+			const lookat = look_at([lon, lat],heading);
+			
+            const url = 'https://a.mapillary.com/v3/images?client_id=' + client_id + '&closeto=' + lon + ',' + lat + '&lookat=' + lookat[0] + ',' + lookat[1] + '&per_page=1&radius=20&pano=false';
 			
 			const request = new XMLHttpRequest();
 			request.open('GET', url, true);
