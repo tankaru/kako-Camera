@@ -20,7 +20,7 @@ h1 {
 </head>
 <body>
 <!-- https://blog.katsubemakito.net/html5/camera1 -->
-<h1>Time travel Camera 0.1933</h1>
+<h1>Time travel Camera 0.1955</h1>
 
 <!-- https://otiai10.hatenablog.com/entry/2019/11/11/090124 -->
 <video id="camera" width="300" height="200" autoplay muted playsinline="true"></video>
@@ -120,7 +120,9 @@ window.onload = () => {
 			
 			const lookat = look_at([lon, lat],heading);
 			
-            const url = 'https://a.mapillary.com/v3/images?client_id=' + client_id + '&closeto=' + lon + ',' + lat + '&lookat=' + lookat[0] + ',' + lookat[1] + '&per_page=1&radius=20&pano=false';
+            const url = 'https://a.mapillary.com/v3/images?client_id=' + client_id + '&closeto=' + lon + ',' + lat + /*'&lookat=' + lookat[0] + ',' + lookat[1] +*/ '&per_page=1&radius=20&pano=false';
+			
+			console.log(url);
 			
 			const request = new XMLHttpRequest();
 			request.open('GET', url, true);
