@@ -20,7 +20,7 @@ h1 {
 </head>
 <body>
 <!-- https://blog.katsubemakito.net/html5/camera1 -->
-<h1>Time travel Camera 0.1736</h1>
+<h1>Time travel Camera 0.1811</h1>
 
 <!-- https://otiai10.hatenablog.com/entry/2019/11/11/090124 -->
 <video id="camera" width="300" height="200" autoplay muted playsinline="true"></video>
@@ -49,7 +49,7 @@ h1 {
 
 <script>
 
-const client_id = 'NEh3V0ZjaE1fT1Nkdk9jMnJlSGNQQToyNzlmZjQxM2U2MjBjMGUy';
+const client_id = 'NEh3V0ZjaE1fT1Nkdk9jMnJlSGNQQTpkZmJhZTQyMDhiNWY3MzEw';
 
 function look_at([lon, lat], heading){
 	
@@ -117,7 +117,7 @@ window.onload = () => {
 				const data = JSON.parse(this.response);
 				console.log(JSON.stringify(data));
 				const photos = data.features;
-				if (photos.lenth < 1) {document.getElementById("mapillary").innerText = "No photo around here"; retrun;};
+				if (photos.length < 1) {document.getElementById("mapillary").innerText = "No photo around here"; retrun;};
 				const photo = photos[0];
 				const properties = photo.properties;
 				const key = properties.key;
