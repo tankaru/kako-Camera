@@ -80,14 +80,14 @@ window.onload = () => {
 				const data = JSON.parse(this.response);
 				console.log(JSON.stringify(data));
 				const photos = data.features;
-				if (photos.length < 1) {document.getElementById("mapillary").innerText = "No photo around here"; retrun;};
+				if (photos.length < 1) {document.getElementById("captured_at").innerText = "No photo around here"; retrun;};
 				const photo = photos[0];
 				const properties = photo.properties;
 				const key = properties.key;
 				const captured_at = properties.captured_at;
 				const username = properties.username;
 				const img = 'https://images.mapillary.com/' + key + '/thumb-320.jpg';
-				document.getElementById("mapillary").innerHTML = '<img src="' + img + '">';
+				document.getElementById("mapillary").setAttribute("src", img);
 				const d =  new Date(captured_at);
 				document.getElementById("captured_at").innerText ="Captured at: " + d.toLocaleString() + ", By: " + username + " CC BY-SA";
 				
