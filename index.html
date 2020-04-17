@@ -13,36 +13,52 @@
 	clear:left;
 	background-color: #ddd;
 }
-h1 {
+.header {
 	font-size: small;
 }
+.footer {
+	font-size: small;
+}
+.footer p, ul{
+	margin: 0;
+}
+
+#captured p{
+	margin: 0;
+}
+
   </style>
 </head>
 <body>
 <!-- https://blog.katsubemakito.net/html5/camera1 -->
-<h1>Time travel Camera 0.2139</h1>
-
+<div class="header">
+<h1>Time travel Camera 0.0849</h1>
+</div>
 <!-- https://otiai10.hatenablog.com/entry/2019/11/11/090124 -->
 <video id="camera" width="300" height="200" autoplay muted playsinline="true"></video>
 
 <!--
 <canvas id="picture" width="300" height="200"></canvas>
 -->
+<div id="captured">
 <p><img id="mapillary" src="" width="300"></span></p>
 <p><span id="captured_at"></span></p>
+</div>
 <form>
   <button type="button" id="shutter">Shoot!</button>
 </form>
+<div class="footer">
 <p>Use iPhone, Safari, portrait style</p>
 <div id="attributions">
-<p>Attributions
-<ul>
+<p style="margin-bottom:0;">Attributions</p>
+<ul style="margin-top:0;">
 <li>Photo: Mapillary
 <li>SE: <a href="https://soundeffect-lab.info/">効果音ラボ</a>
 <li>Source code: <a href="https://blog.katsubemakito.net/html5/camera1">ねこの足跡R</a>
 </ul>
 </div>
 <p>Bug report at <a href="https://github.com/tankaru/kako-Camera">Github</a></p>
+</div>
 <audio id="se" preload="auto">
   <source src="_sound_machine_mp3_camera-shutter1.mp3" type="audio/mp3">
 </audio>
