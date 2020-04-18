@@ -3,4 +3,6 @@
  
 [Try here](https://tankaru.github.io/kako-Camera/)
 
+![](kakocamera.jpg)
+
 [Behaviour](https://twitter.com/muramototomoya/status/1249991101726904320)
